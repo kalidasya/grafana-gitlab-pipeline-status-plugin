@@ -1,0 +1,46 @@
+{
+  "type": "app",
+  "name": "grafana-gitlab-pipeline-status-plugin",
+  "id": "grafana-gitlab-pipeline-status-plugin",
+  "info": {
+    "description": "Datasource and panel bundle to display gitlab pipeline status on grafana",
+    "author": {
+      "name": "Tamas Kende",
+      "url": ""
+    },
+    "keywords": [
+      "gitlab", "CI", "pipeline", "build", "status"
+    ],
+    "logos": {
+      "small": "img/logo.svg",
+      "large": "img/logo.svg"
+    },
+    "links": [
+      {
+        "name": "Website",
+        "url": ""
+      },
+      {
+        "name": "License",
+        "url": ""
+      }
+    ],
+    "screenshots": [],
+    "version": "%VERSION%",
+    "updated": "%TODAY%"
+  },
+  "includes": [
+    {
+      "type": "panel",
+      "name": "gitlab-pipeline-status-panel"
+    },
+    {
+      "type": "datasource",
+      "name": "gitlab-datasource"
+    }
+  ],
+  "dependencies": {
+    "grafanaVersion": "7.0.x",
+    "plugins": []
+  }
+}

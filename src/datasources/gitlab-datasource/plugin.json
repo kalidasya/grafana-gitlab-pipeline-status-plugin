@@ -1,0 +1,51 @@
+{
+  "type": "datasource",
+  "name": "gitlabci-pipeline-app",
+  "id": "active-video-gitlabci-pipeline-app",
+  "metrics": true,
+  "info": {
+    "description": "Grafana plugin to display pipeline results",
+    "author": {
+      "name": "tkende",
+      "url": ""
+    },
+    "keywords": [
+      "gitlab",
+      "pipeline",
+      "ci"
+    ],
+    "logos": {
+      "small": "img/logo.svg",
+      "large": "img/logo.svg"
+    },
+    "links": [
+      {
+        "name": "Website",
+        "url": "https://github.com/grafana/simple-datasource"
+      },
+      {
+        "name": "License",
+        "url": "https://github.com/grafana/simple-datasource/blob/master/LICENSE"
+      }
+    ],
+    "screenshots": [],
+    "version": "%VERSION%",
+    "updated": "%TODAY%"
+  },
+  "dependencies": {
+    "grafanaVersion": "6.5.x",
+    "plugins": []
+  },
+  "routes": [
+    {
+      "path": "",
+      "url": "{{.JsonData.url}}",
+      "headers": [
+        {
+          "name": "PRIVATE-TOKEN",
+          "content": "{{ .SecureJsonData.privateToken }}"
+        }
+      ]
+    }
+  ]
+}

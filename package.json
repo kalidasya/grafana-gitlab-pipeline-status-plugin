@@ -1,0 +1,34 @@
+{
+  "name": "grafana-gitlab-pipeline-plugin",
+  "version": "1.0.0",
+  "description": "Datasource and panel bundle to display pipeline status on grafana dashboard",
+  "scripts": {
+    "build": "grafana-toolkit plugin:build",
+    "test": "grafana-toolkit plugin:test",
+    "dev": "grafana-toolkit plugin:dev",
+    "watch": "grafana-toolkit plugin:dev --watch"
+  },
+  "repository": "",
+  "author": "Tamas Kende",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "",
+    "email": ""
+  },
+  "devDependencies": {
+    "@grafana/data": "^7.0.0",
+    "@grafana/toolkit": "^7.0.0",
+    "@grafana/ui": "^7.0.0",
+    "@grafana/runtime": "^7.0.0",
+    "emotion": "10.0.27"
+  },
+  "engines": {
+    "node": ">=12 <13"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.168",
+    "lodash": "^4.17.20",
+    "@apollo/client": "^3.3.7",
+    "graphql": "^15.4.0"
+  }
+}
