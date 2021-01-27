@@ -16,31 +16,22 @@ const getComponentStyles = (theme: GrafanaTheme) => css`
   height: 100%;
 `;
 
+function zip(...iterables: any[]) {
+  return Array.from({ length: iterables[0].length }).map((_, ind) =>
+    iterables.reduce((all, list) => [...all, list[ind]], [])
+  );
+}
+
 export const GitlabCIPipelineStatusPanel: React.FC<Props> = ({ options, data, width, height }) => {
   const justifyContent = options.justify;
-  console.log(options);
   const styles = cx(
     useStyles(getComponentStyles),
     css`
       justify-content: ${justifyContent};
     `
   );
-  console.log(styles);
-  let pipelines: any = [];
-  for (let entry of data.series) {
-    console.log(entry);
-    pipelines = pipelines.concat(
-      entry.fields[0].values
-        .toArray()
-        .map((v, i) => [
-          v,
-          entry.fields[1].values.toArray()[i],
-          entry.fields[2].values.toArray()[i],
-          entry.fields[3].values.toArray()[i],
-          entry.fields[4].values.toArray()[i],
-        ])
-    );
-  }
+  const f = data.series.map(serie => serie.fields.map(v => v.values.toArray())).pop() || [];
+  const pipelines: any[] = zip(...f);
 
   return (
     <div className={styles}>

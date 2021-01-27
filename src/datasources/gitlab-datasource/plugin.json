@@ -3,6 +3,7 @@
   "name": "gitlabci-pipeline-app",
   "id": "active-video-gitlabci-pipeline-app",
   "metrics": true,
+  "streaming": true,
   "info": {
     "description": "Grafana plugin to display pipeline results",
     "author": {
@@ -42,8 +43,12 @@
       "url": "{{.JsonData.url}}",
       "headers": [
         {
-          "name": "PRIVATE-TOKEN",
-          "content": "{{ .SecureJsonData.privateToken }}"
+          "name": "Authorization",
+          "content": "Bearer {{ .SecureJsonData.privateToken }}"
+        },
+        {
+          "name": "Content-Type",
+          "content": "application/json"
         }
       ]
     }
