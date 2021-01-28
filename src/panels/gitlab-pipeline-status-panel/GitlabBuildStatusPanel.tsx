@@ -17,6 +17,10 @@ const getComponentStyles = (theme: GrafanaTheme) => css`
 `;
 
 function zip(...iterables: any[]) {
+  if (iterables.length === 0) {
+    return [];
+  }
+
   return Array.from({ length: iterables[0].length }).map((_, ind) =>
     iterables.reduce((all, list) => [...all, list[ind]], [])
   );

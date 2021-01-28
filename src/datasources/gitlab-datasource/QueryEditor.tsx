@@ -11,9 +11,9 @@ const { FormField } = LegacyForms;
 type Props = QueryEditorProps<GitlabPipelineDataSource, GitlabPipelineQuery, GitlabPipelineDataSourceOptions>;
 
 export class QueryEditor extends PureComponent<Props> {
-  onProjectNameListChange = (event: ChangeEvent<HTMLInputElement>) => {
+  onBranchNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { onChange, query } = this.props;
-    onChange({ ...query, projectNameList: event.target.value });
+    onChange({ ...query, branchName: event.target.value });
   };
 
   onGroupnameChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -24,8 +24,7 @@ export class QueryEditor extends PureComponent<Props> {
   render() {
     // todo query gitlab to get list of groups (no graphql api)
     // and list of projects
-    const query = defaults(this.props.query, defaultQuery);
-    const { groupName, projectNameList } = query;
+    const { groupName, branchName } = defaults(this.props.query, defaultQuery);
 
     return (
       <div className="gf-form">
@@ -38,10 +37,10 @@ export class QueryEditor extends PureComponent<Props> {
         />
         <FormField
           labelWidth={20}
-          value={projectNameList || ''}
-          onChange={this.onProjectNameListChange}
-          label="Comma separated list of project names"
-          tooltip="Use * for all projects"
+          value={branchName || ''}
+          onChange={this.onBranchNameChange}
+          label="Branch name of the pipeline"
+          tooltip="Only piplines with this branch will be displayed"
         />
       </div>
     );

@@ -32,7 +32,6 @@ export const GitlabPipelineStatus: React.FC<GitlabCIPipelineStatusData> = ({ nam
     `
   );
   const elapsed = updatedAt !== null ? dateTime(updatedAt).from(dateTime()) : '';
-  console.log(styles);
   return (
     <div className={styles}>
       <a href={link}>

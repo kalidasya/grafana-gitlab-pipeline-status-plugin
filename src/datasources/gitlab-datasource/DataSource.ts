@@ -25,13 +25,26 @@ export class GitlabPipelineDataSource extends DataSourceApi<GitlabPipelineQuery,
   }
 
   async query(options: DataQueryRequest<GitlabPipelineQuery>): Promise<DataQueryResponse> {
-    console.log(options);
-    const fragment = `fragment fields on Group {
+    // console.log(options);
+    // groups {  // if we want to display pipelines inside pipeline/stages/nodes
+    //   nodes {
+    //     name
+    //     detailedStatus {
+    //       label
+    //     }
+    //   }
+    // }
+    const query = options.targets
+      .filter(v => !v.hide)
+      .reduce(
+        (v, q) =>
+          v +
+          `${q.groupName}: group(fullPath: "${q.groupName}") {
         projects (first: 100) {
           nodes {
             webUrl
             fullPath
-            pipelines(ref: "master", first: 1) {
+            pipelines(ref: "${q.branchName}", first: 1) {
               nodes {
                 id
                 status
@@ -52,32 +65,18 @@ export class GitlabPipelineDataSource extends DataSourceApi<GitlabPipelineQuery,
             endCursor
           }
         }
-      }
-    `;
-    // groups {  // if we want to display pipelines inside pipeline/stages/nodes
-    //   nodes {
-    //     name
-    //     detailedStatus {
-    //       label
-    //     }
-    //   }
-    // }
-    const query = options.targets.reduce(
-      (v, q) => v + `${q.groupName}: group(fullPath: "${q.groupName}") {...fields}`,
-      ''
-    );
-    console.log(query, fragment);
+      }`,
+        ''
+      );
     return this.client
       .query({
         query: gql`
           query {
             ${query}
           }
-          ${fragment}
         `,
       })
       .then(response => {
-        console.log(response);
         const frame = new MutableDataFrame({
           fields: [
             { name: 'Project', type: FieldType.string },
@@ -122,7 +121,6 @@ export class GitlabPipelineDataSource extends DataSourceApi<GitlabPipelineQuery,
         `,
       })
       .then(res => {
-        console.log(res);
         if (res.data.length === 0) {
           throw new Error('Match not found.');
         }
