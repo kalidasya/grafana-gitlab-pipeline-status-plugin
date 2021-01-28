@@ -31,12 +31,11 @@ export const GitlabPipelineStatus: React.FC<GitlabCIPipelineStatusData> = ({ nam
       background: ${getColor(status)};
     `
   );
-  const elapsed = dateTime(updatedAt).from(dateTime());
-  console.log(styles);
+  const elapsed = updatedAt !== null ? dateTime(updatedAt).from(dateTime()) : '';
   return (
     <div className={styles}>
       <a href={link}>
-        <div>{name.replace(/ +/, '')}</div>
+        <div>{name}</div>
         <div>#{id}</div>
         <div>{elapsed}</div>
       </a>

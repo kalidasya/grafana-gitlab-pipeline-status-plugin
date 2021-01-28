@@ -19,15 +19,6 @@ export class ConfigEditor extends PureComponent<Props, State> {
     onOptionsChange({ ...options, jsonData });
   };
 
-  onGroupNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { onOptionsChange, options } = this.props;
-    const jsonData = {
-      ...options.jsonData,
-      groupName: event.target.value,
-    };
-    onOptionsChange({ ...options, jsonData });
-  };
-
   onPrivateTokenChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { onOptionsChange, options } = this.props;
     onOptionsChange({
@@ -69,16 +60,6 @@ export class ConfigEditor extends PureComponent<Props, State> {
             onChange={this.onURLChange}
             value={jsonData.url || ''}
             placeholder="URL of gitlab api"
-          />
-        </div>
-        <div className="gf-form">
-          <FormField
-            label="Group name"
-            labelWidth={6}
-            inputWidth={20}
-            onChange={this.onGroupNameChange}
-            value={jsonData.groupName || ''}
-            placeholder="Gitlab group name"
           />
         </div>
         <div className="gf-form">
