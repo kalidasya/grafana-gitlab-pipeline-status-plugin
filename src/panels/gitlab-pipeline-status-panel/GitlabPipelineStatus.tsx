@@ -39,7 +39,7 @@ export const GitlabPipelineStatus: React.FC<GitlabCIPipelineStatusData> = ({ nam
   if (status === 'running') {
     styles += ' blink';
   }
-  const elapsed = updatedAt !== null ? dateTime(updatedAt).from(dateTime()) : '';
+  const elapsed = updatedAt !== null ? dateTime(updatedAt).from(dateTime()) : 'n.a.';
   return (
     <div className={styles}>
       <a href={link}>

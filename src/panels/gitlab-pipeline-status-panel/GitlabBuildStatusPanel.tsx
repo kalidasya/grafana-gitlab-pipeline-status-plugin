@@ -27,7 +27,7 @@ function zip(...iterables: any[]) {
 }
 
 export const GitlabCIPipelineStatusPanel: React.FC<Props> = ({ options, data, width, height }) => {
-  console.log('options', options);
+  console.log('option', options);
   console.log('data', data);
   const justifyContent = options.justify;
   const styles = cx(
@@ -41,16 +41,8 @@ export const GitlabCIPipelineStatusPanel: React.FC<Props> = ({ options, data, wi
 
   return (
     <div className={styles}>
-      {pipelines.map((pipeline: any) => {
-        return (
-          <GitlabPipelineStatus
-            name={pipeline[0]}
-            id={pipeline[1]}
-            link={pipeline[2]}
-            status={pipeline[3]}
-            updatedAt={pipeline[4]}
-          />
-        );
+      {pipelines.map(([name, id, link, status, updatedAt]) => {
+        return <GitlabPipelineStatus name={name} id={id} link={link} status={status} updatedAt={updatedAt} />;
       })}
     </div>
   );
