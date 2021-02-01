@@ -7,6 +7,7 @@ import {
   DataSourceInstanceSettings,
   MutableDataFrame,
   FieldType,
+  dateTime,
 } from '@grafana/data';
 
 import { GitlabPipelineQuery, GitlabPipelineDataSourceOptions } from './types';
@@ -81,22 +82,35 @@ export class GitlabPipelineDataSource extends DataSourceApi<GitlabPipelineQuery,
             { name: 'Stages', type: FieldType.other },
           ],
         });
-        Object.keys(response.data).forEach(k =>
-          response.data[k].projects.nodes.forEach((project: any) => {
-            if (project.pipelines.nodes.length > 0) {
-              const pipeline = project.pipelines.nodes[0];
-              const id = pipeline.id.split('/').pop();
-              frame.appendRow([
-                project.fullPath,
-                id,
-                `${project.webUrl}/pipelines/${id}`,
-                pipeline.status.toLocaleLowerCase(),
-                pipeline.finishedAt,
-                pipeline.stages.nodes.map((stage: any) => [stage.name, stage.detailedStatus.label]),
-              ]);
-            }
-          })
-        );
+        Object.keys(response.data)
+          .reduce<any[]>((acc, val) => [...acc, ...response.data[val].projects.nodes], [])
+          .filter((v: any) => v.pipelines.nodes.length > 0)
+          .sort(
+            (
+              {
+                pipelines: {
+                  nodes: [current],
+                },
+              }: any,
+              {
+                pipelines: {
+                  nodes: [next],
+                },
+              }: any
+            ) => dateTime(next.finishedAt).valueOf() - dateTime(current.finishedAt).valueOf()
+          )
+          .forEach((project: any) => {
+            const pipeline = project.pipelines.nodes[0];
+            const id = pipeline.id.split('/').pop();
+            frame.appendRow([
+              project.fullPath,
+              id,
+              `${project.webUrl}/pipelines/${id}`,
+              pipeline.status.toLocaleLowerCase(),
+              pipeline.finishedAt,
+              pipeline.stages.nodes.map((stage: any) => [stage.name, stage.detailedStatus.label]),
+            ]);
+          });
         return frame;
       })
       .then(data => ({ data: [data] } as DataQueryResponse));
