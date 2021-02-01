@@ -25,15 +25,7 @@ export class GitlabPipelineDataSource extends DataSourceApi<GitlabPipelineQuery,
   }
 
   async query(options: DataQueryRequest<GitlabPipelineQuery>): Promise<DataQueryResponse> {
-    // console.log(options);
-    // groups {  // if we want to display pipelines inside pipeline/stages/nodes
-    //   nodes {
-    //     name
-    //     detailedStatus {
-    //       label
-    //     }
-    //   }
-    // }
+    console.log('query', options);
     const query = options.targets
       .filter(v => !v.hide)
       .reduce(
@@ -75,8 +67,10 @@ export class GitlabPipelineDataSource extends DataSourceApi<GitlabPipelineQuery,
             ${query}
           }
         `,
+        fetchPolicy: 'network-only',
       })
       .then(response => {
+        console.log('response', response);
         const frame = new MutableDataFrame({
           fields: [
             { name: 'Project', type: FieldType.string },

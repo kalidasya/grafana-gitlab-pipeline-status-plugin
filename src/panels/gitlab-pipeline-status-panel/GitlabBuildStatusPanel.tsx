@@ -27,6 +27,8 @@ function zip(...iterables: any[]) {
 }
 
 export const GitlabCIPipelineStatusPanel: React.FC<Props> = ({ options, data, width, height }) => {
+  console.log('options', options);
+  console.log('data', data);
   const justifyContent = options.justify;
   const styles = cx(
     useStyles(getComponentStyles),
