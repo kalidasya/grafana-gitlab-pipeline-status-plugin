@@ -8,4 +8,5 @@ export interface GitlabCIPipelineStatusData {
   status: string;
   updatedAt: string;
   id: string;
+  className: string;
 }

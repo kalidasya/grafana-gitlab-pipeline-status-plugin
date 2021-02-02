@@ -47,7 +47,7 @@ export const plugin = new PanelPlugin<GitlabCIPipelineStatusOptions>(GitlabCIPip
       })
       .addColorPicker({
         name: 'Running start',
-        path: 'running-start',
+        path: 'runningStart',
         description: 'First color of the running animation',
         defaultValue: '#1056c0',
         category: ['Color'],
@@ -59,7 +59,7 @@ export const plugin = new PanelPlugin<GitlabCIPipelineStatusOptions>(GitlabCIPip
       })
       .addColorPicker({
         name: 'Running end',
-        path: 'running-end',
+        path: 'runningEnd',
         description: 'End color of the running animation',
         defaultValue: '#1056c0',
         category: ['Color'],
