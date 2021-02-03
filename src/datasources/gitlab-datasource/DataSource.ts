@@ -42,12 +42,15 @@ export class GitlabPipelineDataSource extends DataSourceApi<GitlabPipelineQuery,
                 id
                 status
                 duration
-                finishedAt          
+                finishedAt
+                startedAt
+                updatedAt          
                 stages {
                   nodes {
                     name
                     detailedStatus {
                       label
+                      detailsPath
                     }
                   }
                 }
@@ -78,7 +81,9 @@ export class GitlabPipelineDataSource extends DataSourceApi<GitlabPipelineQuery,
             { name: 'Id', type: FieldType.string },
             { name: 'Link', type: FieldType.string },
             { name: 'Status', type: FieldType.string },
+            { name: 'FinishedAt', type: FieldType.time },
             { name: 'UpdatedAt', type: FieldType.time },
+            { name: 'StarteddAt', type: FieldType.time },
             { name: 'Stages', type: FieldType.other },
           ],
         });
@@ -97,7 +102,7 @@ export class GitlabPipelineDataSource extends DataSourceApi<GitlabPipelineQuery,
                   nodes: [next],
                 },
               }: any
-            ) => dateTime(next.finishedAt).valueOf() - dateTime(current.finishedAt).valueOf()
+            ) => dateTime(next.startedAt).valueOf() - dateTime(current.startedAt).valueOf()
           )
           .forEach((project: any) => {
             const pipeline = project.pipelines.nodes[0];
@@ -107,8 +112,14 @@ export class GitlabPipelineDataSource extends DataSourceApi<GitlabPipelineQuery,
               id,
               `${project.webUrl}/pipelines/${id}`,
               pipeline.status.toLocaleLowerCase(),
+              pipeline.startedAt,
+              pipeline.updatedAt,
               pipeline.finishedAt,
-              pipeline.stages.nodes.map((stage: any) => [stage.name, stage.detailedStatus.label]),
+              pipeline.stages.nodes.map((stage: any) => [
+                stage.name,
+                stage.detailedStatus.label,
+                `${project.webUrl}${stage.detailedStatus.detailsPath}`,
+              ]),
             ]);
           });
         return frame;
