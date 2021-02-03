@@ -8,14 +8,14 @@ import { GitlabPipelineStatus } from './GitlabPipelineStatus';
 
 interface Props extends PanelProps<GitlabCIPipelineStatusOptions> {}
 
-const getStyles = stylesFactory((theme, { justify }) => {
+const getStyles = stylesFactory((theme, { justify, alignContent, alignItems }) => {
   return {
     wrapper: css`
       display: flex;
       flex: auto;
       flex-flow: row wrap;
-      align-items: stretch;
-      align-content: stretch;
+      align-items: ${alignItems};
+      align-content: ${alignContent};
       height: 100%;
       justify-content: ${justify};
     `,

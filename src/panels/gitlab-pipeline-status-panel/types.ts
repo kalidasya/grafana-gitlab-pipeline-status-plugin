@@ -1,5 +1,12 @@
 export interface GitlabCIPipelineStatusOptions {
   justify: string;
+  alignContent: string;
+  alignItems: string;
+  failed: string;
+  passed: string;
+  runningStart: string;
+  runningEnd: string;
+  other: string;
 }
 
 export interface GitlabCIPipelineStageData {

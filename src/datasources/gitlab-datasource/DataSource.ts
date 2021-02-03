@@ -115,11 +115,14 @@ export class GitlabPipelineDataSource extends DataSourceApi<GitlabPipelineQuery,
               pipeline.startedAt,
               pipeline.updatedAt,
               pipeline.finishedAt,
-              pipeline.stages.nodes.map((stage: any) => [
-                stage.name,
-                stage.detailedStatus.label,
-                `${project.webUrl}${stage.detailedStatus.detailsPath}`,
-              ]),
+              pipeline.stages.nodes.map((stage: any) => {
+                // remove the duplicated group/project
+                const path = stage.detailedStatus.detailsPath
+                  .split('/')
+                  .slice(3)
+                  .join('/');
+                return [stage.name, stage.detailedStatus.label, `${project.webUrl}/${path}`];
+              }),
             ]);
           });
         return frame;

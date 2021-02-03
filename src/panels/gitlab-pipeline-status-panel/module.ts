@@ -9,6 +9,7 @@ export const plugin = new PanelPlugin<GitlabCIPipelineStatusOptions>(GitlabCIPip
         name: 'Justify',
         path: 'justify',
         description: 'Horizontal alignment of the cards',
+        category: ['Layout'],
         settings: {
           allowCustomValue: false,
           options: [
@@ -18,6 +19,41 @@ export const plugin = new PanelPlugin<GitlabCIPipelineStatusOptions>(GitlabCIPip
             { value: 'space-between', label: 'Even distribution 1' },
             { value: 'space-around', label: 'Even distribution 2' },
             { value: 'space-evenly', label: 'Even distribution 3' },
+          ],
+        },
+      })
+      .addSelect({
+        name: 'Align content',
+        path: 'alignContent',
+        description: 'Vertical alignment of the cards',
+        category: ['Layout'],
+        settings: {
+          allowCustomValue: false,
+          options: [
+            { value: 'normal', label: 'Normal' },
+            { value: 'flex-start', label: 'Aligned to the start of the container' },
+            { value: 'flex-end', label: 'Aligned to the end of the container' },
+            { value: 'center', label: 'Center' },
+            { value: 'space-between', label: 'Even distribution 1' },
+            { value: 'space-around', label: 'Even distribution 2' },
+            { value: 'space-evenly', label: 'Even distribution 3' },
+            { value: 'stretch', label: 'Even distribution 4' },
+          ],
+        },
+      })
+      .addSelect({
+        name: 'Align items',
+        path: 'alignItems',
+        description: 'Alignment of the cards on the cross axis',
+        category: ['Layout'],
+        settings: {
+          allowCustomValue: false,
+          options: [
+            { value: 'stretch', label: 'Default' },
+            { value: 'flex-start', label: 'Start of the axis' },
+            { value: 'flex-end', label: 'End of the axis aligned' },
+            { value: 'center', label: 'Center' },
+            { value: 'baseline', label: 'Aligned to baseline' },
           ],
         },
       })
@@ -70,7 +106,7 @@ export const plugin = new PanelPlugin<GitlabCIPipelineStatusOptions>(GitlabCIPip
         },
       })
       .addColorPicker({
-        name: 'other',
+        name: 'Other',
         path: 'other',
         description: 'Color of the other pipelines states (e.g. cancelled)',
         defaultValue: 'grey',
