@@ -32,8 +32,8 @@ export class GitlabPipelineDataSource extends DataSourceApi<GitlabPipelineQuery,
       .reduce(
         (v, q) =>
           v +
-          `${q.groupName}: group(fullPath: "${q.groupName}") {
-        projects (first: 100) {
+          `${q.refId}: group(fullPath: "${q.groupName}") {
+        projects (first: 75) {
           nodes {
             webUrl
             fullPath
@@ -41,7 +41,6 @@ export class GitlabPipelineDataSource extends DataSourceApi<GitlabPipelineQuery,
               nodes {
                 id
                 status
-                duration
                 finishedAt
                 startedAt
                 updatedAt          
@@ -102,7 +101,13 @@ export class GitlabPipelineDataSource extends DataSourceApi<GitlabPipelineQuery,
                   nodes: [next],
                 },
               }: any
-            ) => dateTime(next.startedAt).valueOf() - dateTime(current.startedAt).valueOf()
+            ) => {
+              const [left, right] =
+                next.startedAt && current.startedAt
+                  ? [current.startedAt, next.startedAt]
+                  : [current.finishedAt, next.finishedAt];
+              return dateTime(right).valueOf() - dateTime(left).valueOf();
+            }
           )
           .forEach((project: any) => {
             const pipeline = project.pipelines.nodes[0];
