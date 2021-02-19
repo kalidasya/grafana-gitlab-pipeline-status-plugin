@@ -26,9 +26,9 @@
       }
     ],
     "screenshots": [
-      {"name": "Dashboard view", "path": "img/screenshots/dashboard-view.png"},
-      {"name": "Datasource config", "path": "img/screenshots/datasource-config.png"},
-      {"name": "Panel settings page", "path": "img/screenshots/settings-page.png"}
+      {"name": "Dashboard view", "path": "../docs/img/screenshots/dashboard-view.png"},
+      {"name": "Datasource config", "path": "../docs/img/screenshots/datasource-config.png"},
+      {"name": "Panel settings page", "path": "../docs/img/screenshots/settings-page.png"}
     ],
     "version": "%VERSION%",
     "updated": "%TODAY%"

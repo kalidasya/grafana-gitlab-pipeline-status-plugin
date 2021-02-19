@@ -6,7 +6,20 @@ I had problems with the existing GitlabCI Pipeline dashboards, they displayed to
 
 Note: to see the datasource plugin you need to enable the plugin in the plugins page, after installation. 
 
+## Configuration
+
+[Enable plugin](https://raw.githubusercontent.com/kalidasya/grafana-gitlab-pipeline-status-plugin/main/docs/img/screenshots/grafana-gitlab-enable-plugin.webm)
+
+[Create datasource](https://raw.githubusercontent.com/kalidasya/grafana-gitlab-pipeline-status-plugin/main/docs/img/screenshots/grafana-gitlab-create-datasource.webm)
+
+[Create panel](https://raw.githubusercontent.com/kalidasya/grafana-gitlab-pipeline-status-plugin/main/docs/img/screenshots/grafana-gitlab-create-panel.webm)
+
 ## Screenshots
+
+![Dashboard](https://raw.githubusercontent.com/kalidasya/grafana-gitlab-pipeline-status-plugin/main/docs/img/screenshots/dashboard-view.png)
+![Datasource config](https://raw.githubusercontent.com/kalidasya/grafana-gitlab-pipeline-status-plugin/main/docs/img/screenshots/datasource-config.png)
+![Settings page](https://raw.githubusercontent.com/kalidasya/grafana-gitlab-pipeline-status-plugin/main/docs/img/screenshots/settings-page.png)
+
 
 
 ## Code metrics
