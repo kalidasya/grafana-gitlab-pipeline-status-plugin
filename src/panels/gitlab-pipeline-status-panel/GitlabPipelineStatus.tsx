@@ -80,7 +80,7 @@ export const GitlabPipelineStatus: React.FC<GitlabCIPipelineStatusData> = ({
         </div>
         <div>{elapsed}</div>
         <div>
-          <GitlabPipelineStages stages={stages} />
+          <GitlabPipelineStages stages={stages || []} />
         </div>
       </a>
     </div>
