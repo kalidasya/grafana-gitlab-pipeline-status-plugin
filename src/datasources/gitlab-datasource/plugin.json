@@ -1,34 +1,20 @@
 {
   "type": "datasource",
-  "name": "gitlabci-pipeline-app",
-  "id": "active-video-gitlabci-pipeline-app",
+  "name": "grafana-gitlab-pipeline-status-plugin-datasource",
+  "id": "grafana-gitlab-pipeline-status-plugin-datasource",
   "metrics": true,
-  "streaming": true,
   "info": {
-    "description": "Grafana plugin to display pipeline results",
+    "description": "",
     "author": {
       "name": "tkende",
       "url": ""
     },
-    "keywords": [
-      "gitlab",
-      "pipeline",
-      "ci"
-    ],
+    "keywords": [],
     "logos": {
       "small": "img/logo.svg",
       "large": "img/logo.svg"
     },
-    "links": [
-      {
-        "name": "Website",
-        "url": "https://github.com/kalidasya/grafana-gitlab-pipeline-status-plugin"
-      },
-      {
-        "name": "License",
-        "url": "https://github.com/kalidasya/grafana-gitlab-pipeline-status-plugin/blob/master/LICENSE"
-      }
-    ],
+    "links": [],
     "screenshots": [],
     "version": "%VERSION%",
     "updated": "%TODAY%"

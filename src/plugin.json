@@ -3,13 +3,13 @@
   "name": "grafana-gitlab-pipeline-status-plugin",
   "id": "grafana-gitlab-pipeline-status-plugin",
   "info": {
-    "description": "Datasource and panel bundle to display gitlab pipeline status on grafana",
+    "description": "Datasource and panel bundle to display gitlab pipeline status on Grafana",
     "author": {
       "name": "Tamas Kende",
       "url": ""
     },
     "keywords": [
-      "gitlab", "CI", "pipeline", "build", "status"
+      "gitlab", "CI", "pipeline", "build", "status", "dashboard"
     ],
     "logos": {
       "small": "img/logo.svg",
@@ -17,15 +17,19 @@
     },
     "links": [
       {
-        "name": "Website",
-        "url": ""
+        "name": "Github",
+        "url": "https://github.com/kalidasya/grafana-gitlab-pipeline-status-plugin"
       },
       {
         "name": "License",
-        "url": ""
+        "url": "https://github.com/kalidasya/grafana-gitlab-pipeline-status-plugin/blob/master/LICENSE"
       }
     ],
-    "screenshots": [],
+    "screenshots": [
+      {"name": "Dashboard view", "path": "../docs/img/screenshots/dashboard-view.png"},
+      {"name": "Datasource config", "path": "../docs/img/screenshots/datasource-config.png"},
+      {"name": "Panel settings page", "path": "../docs/img/screenshots/settings-page.png"}
+    ],
     "version": "%VERSION%",
     "updated": "%TODAY%"
   },
@@ -40,7 +44,7 @@
     }
   ],
   "dependencies": {
-    "grafanaVersion": "7.0.x",
+    "grafanaVersion": "7.3.x",
     "plugins": []
   }
 }

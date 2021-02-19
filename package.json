@@ -15,19 +15,17 @@
     "url": "https://github.com/kalidasya/grafana-gitlab-pipeline-status-plugin/issues"
   },
   "devDependencies": {
-    "@grafana/data": "^7.0.0",
-    "@grafana/toolkit": "^7.0.0",
-    "@grafana/ui": "^7.0.0",
-    "@grafana/runtime": "^7.0.0",
-    "emotion": "10.0.27"
+    "@apollo/client": "^3.3.7",
+    "@grafana/data": "^7.3.0",
+    "@grafana/runtime": "^7.3.0",
+    "@grafana/toolkit": "^7.3.0",
+    "@grafana/ui": "^7.3.0",
+    "@types/lodash": "^4.14.168",
+    "@emotion/css": "^11.0.0",
+    "graphql": "^15.4.0",
+    "lodash": "^4.17.20"
   },
   "engines": {
     "node": ">=12 <13"
-  },
-  "dependencies": {
-    "@types/lodash": "^4.14.168",
-    "lodash": "^4.17.20",
-    "@apollo/client": "^3.3.7",
-    "graphql": "^15.4.0"
   }
 }
