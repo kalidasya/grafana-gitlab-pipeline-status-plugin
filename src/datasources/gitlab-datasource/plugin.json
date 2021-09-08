@@ -1,7 +1,7 @@
 {
   "type": "datasource",
   "name": "gitlabci-pipeline-app",
-  "id": "active-video-gitlabci-pipeline-app",
+  "id": "grafana-gitlab-pipeline-status-plugin-datasource",
   "metrics": true,
   "streaming": true,
   "info": {

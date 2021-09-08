@@ -35,7 +35,7 @@ export class GitlabPipelineDataSource extends DataSourceApi<GitlabPipelineQuery,
     //   }
     // }
     const query = options.targets
-      .filter(v => !v.hide)
+      .filter((v) => !v.hide)
       .reduce(
         (v, q) =>
           v +
@@ -76,7 +76,7 @@ export class GitlabPipelineDataSource extends DataSourceApi<GitlabPipelineQuery,
           }
         `,
       })
-      .then(response => {
+      .then((response) => {
         const frame = new MutableDataFrame({
           fields: [
             { name: 'Project', type: FieldType.string },
@@ -87,7 +87,7 @@ export class GitlabPipelineDataSource extends DataSourceApi<GitlabPipelineQuery,
             { name: 'Stages', type: FieldType.other },
           ],
         });
-        Object.keys(response.data).forEach(k =>
+        Object.keys(response.data).forEach((k) =>
           response.data[k].projects.nodes.forEach((project: any) => {
             if (project.pipelines.nodes.length > 0) {
               const pipeline = project.pipelines.nodes[0];
@@ -105,7 +105,7 @@ export class GitlabPipelineDataSource extends DataSourceApi<GitlabPipelineQuery,
         );
         return frame;
       })
-      .then(data => ({ data: [data] } as DataQueryResponse));
+      .then((data) => ({ data: [data] } as DataQueryResponse));
   }
 
   async testDatasource() {
@@ -120,7 +120,7 @@ export class GitlabPipelineDataSource extends DataSourceApi<GitlabPipelineQuery,
           }
         `,
       })
-      .then(res => {
+      .then((res) => {
         if (res.data.length === 0) {
           throw new Error('Match not found.');
         }

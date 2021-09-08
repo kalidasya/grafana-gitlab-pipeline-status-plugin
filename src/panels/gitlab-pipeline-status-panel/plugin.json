@@ -1,7 +1,7 @@
 {
   "type": "panel",
   "name": "gitlabci-pipeline-status",
-  "id": "active-video-gitlabci-pipeline-status",
+  "id": "grafana-gitlab-pipeline-status-plugin-panel",
   "info": {
     "description": "Panel to show the status of a gitlab pipeline",
     "author": {

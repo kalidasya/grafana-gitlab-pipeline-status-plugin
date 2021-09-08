@@ -34,7 +34,7 @@ export const GitlabCIPipelineStatusPanel: React.FC<Props> = ({ options, data, wi
       justify-content: ${justifyContent};
     `
   );
-  const f = data.series.map(serie => serie.fields.map(v => v.values.toArray())).pop() || [];
+  const f = data.series.map((serie) => serie.fields.map((v) => v.values.toArray())).pop() || [];
   const pipelines: any[] = zip(...f);
 
   return (
@@ -42,6 +42,7 @@ export const GitlabCIPipelineStatusPanel: React.FC<Props> = ({ options, data, wi
       {pipelines.map((pipeline: any) => {
         return (
           <GitlabPipelineStatus
+            key={pipeline[1]}
             name={pipeline[0]}
             id={pipeline[1]}
             link={pipeline[2]}
