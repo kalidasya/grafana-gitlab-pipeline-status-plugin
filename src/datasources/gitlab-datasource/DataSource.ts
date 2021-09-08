@@ -28,7 +28,7 @@ export class GitlabPipelineDataSource extends DataSourceApi<GitlabPipelineQuery,
   async query(options: DataQueryRequest<GitlabPipelineQuery>): Promise<DataQueryResponse> {
     console.log('query', options);
     const query = options.targets
-      .filter(v => !v.hide)
+      .filter((v) => !v.hide)
       .reduce(
         (v, q) =>
           v +
@@ -72,7 +72,7 @@ export class GitlabPipelineDataSource extends DataSourceApi<GitlabPipelineQuery,
         `,
         fetchPolicy: 'network-only',
       })
-      .then(response => {
+      .then((response) => {
         console.log('response', response);
         const frame = new MutableDataFrame({
           fields: [
@@ -122,17 +122,14 @@ export class GitlabPipelineDataSource extends DataSourceApi<GitlabPipelineQuery,
               pipeline.finishedAt,
               pipeline.stages.nodes.map((stage: any) => {
                 // remove the duplicated group/project
-                const path = stage.detailedStatus.detailsPath
-                  .split('/')
-                  .slice(3)
-                  .join('/');
+                const path = stage.detailedStatus.detailsPath.split('/').slice(3).join('/');
                 return [stage.name, stage.detailedStatus.label, `${project.webUrl}/${path}`];
               }),
             ]);
           });
         return frame;
       })
-      .then(data => ({ data: [data] } as DataQueryResponse));
+      .then((data) => ({ data: [data] } as DataQueryResponse));
   }
 
   async testDatasource() {
@@ -147,7 +144,7 @@ export class GitlabPipelineDataSource extends DataSourceApi<GitlabPipelineQuery,
           }
         `,
       })
-      .then(res => {
+      .then((res) => {
         if (res.data.length === 0) {
           throw new Error('Match not found.');
         }

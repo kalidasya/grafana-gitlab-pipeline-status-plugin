@@ -3,7 +3,7 @@ import { GitlabCIPipelineStatusOptions } from './types';
 import { GitlabCIPipelineStatusPanel } from './GitlabBuildStatusPanel';
 
 export const plugin = new PanelPlugin<GitlabCIPipelineStatusOptions>(GitlabCIPipelineStatusPanel).setPanelOptions(
-  builder => {
+  (builder) => {
     return builder
       .addSelect({
         name: 'Justify',

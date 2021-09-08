@@ -1,26 +1,24 @@
 import React from 'react';
-import { css } from 'emotion';
-import { PanelProps } from '@grafana/data';
-import { stylesFactory, useTheme } from '@grafana/ui';
+import { css } from '@emotion/css';
+import { GrafanaTheme2, PanelProps } from '@grafana/data';
+import { useStyles2 } from '@grafana/ui';
 
 import { GitlabCIPipelineStatusOptions } from './types';
 import { GitlabPipelineStatus } from './GitlabPipelineStatus';
 
 interface Props extends PanelProps<GitlabCIPipelineStatusOptions> {}
 
-const getStyles = stylesFactory((theme, { justify, alignContent, alignItems }) => {
-  return {
-    wrapper: css`
-      display: flex;
-      flex: auto;
-      flex-flow: row wrap;
-      align-items: ${alignItems};
-      align-content: ${alignContent};
-      height: 100%;
-      justify-content: ${justify};
-    `,
-  };
-});
+const getStyles = (options: GitlabCIPipelineStatusOptions) => {
+  return (theme: GrafanaTheme2) => css`
+    display: flex;
+    flex: auto;
+    flex-flow: row wrap;
+    align-items: ${options.alignItems};
+    align-content: ${options.alignContent};
+    height: 100%;
+    justify-content: ${options.justify};
+  `;
+};
 
 function zip(...iterables: any[]) {
   if (iterables.length === 0) {
@@ -34,16 +32,17 @@ function zip(...iterables: any[]) {
 
 export const GitlabCIPipelineStatusPanel: React.FC<Props> = ({ options, data, width, height }) => {
   console.log('option', options);
-  const theme = useTheme();
-  const styles = getStyles(theme, options);
-  const f = data.series.map(serie => serie.fields.map(v => v.values.toArray())).pop() || [];
+  // const theme = useTheme2();
+  const styles = useStyles2(getStyles(options));
+  const f = data.series.map((serie) => serie.fields.map((v) => v.values.toArray())).pop() || [];
   const pipelines: any[] = zip(...f);
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles}>
       {pipelines.map(([name, id, link, status, startedAt, updatedAt, finishedAt, stages]) => {
         return (
           <GitlabPipelineStatus
+            key={id}
             name={name}
             id={id}
             link={link}
