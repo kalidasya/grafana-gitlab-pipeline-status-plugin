@@ -1,6 +1,6 @@
 import React from 'react';
-import { css } from 'emotion';
-import { stylesFactory, useTheme } from '@grafana/ui';
+import { css } from '@emotion/css';
+import { useStyles2 } from '@grafana/ui';
 import {
   CachedBlack18dp,
   CheckCircleOutlineBlack18dp,
@@ -9,17 +9,7 @@ import {
 } from './img/GitlabPipelineImgs';
 
 import { GitlabCIPipelineStageData } from './types';
-
-const getStyles = stylesFactory(theme => {
-  return {
-    stages: css`
-      list-style-type: none;
-    `,
-    stage: css`
-      display: inline;
-    `,
-  };
-});
+import { GrafanaTheme2 } from '@grafana/data';
 
 const getSource = (status: string) => {
   if (status.indexOf('passed') >= 0) {
@@ -34,13 +24,21 @@ const getSource = (status: string) => {
   return PendingBlack18dp;
 };
 
+const getStagesStyles = (theme: GrafanaTheme2) =>
+  css`
+    list-style-type: none;
+  `;
+const getStageStyles = (theme: GrafanaTheme2) =>
+  css`
+    display: inline;
+  `;
+
 const GitlabPipelineStage: React.FC<GitlabCIPipelineStageData> = ({ name, status, detailsPath, displayNames }) => {
-  const theme = useTheme();
-  const styles = getStyles(theme);
+  const styles = useStyles2(getStageStyles);
   const Icon = getSource(status);
 
   return (
-    <li className={styles.stage}>
+    <li className={styles}>
       <span>
         <a href={detailsPath}>
           <Icon size={18} defaultValue={name} />
@@ -52,20 +50,20 @@ const GitlabPipelineStage: React.FC<GitlabCIPipelineStageData> = ({ name, status
 };
 
 export const GitlabPipelineStages: React.FC<any> = ({ stages }) => {
-  const theme = useTheme();
-  const styles = getStyles(theme);
+  const styles = useStyles2(getStagesStyles);
   const allPassed = stages.reduce(
     (acc: boolean, [name, status, path]: any) => acc && status.indexOf('passed') >= 0,
     true
   );
 
   return (
-    <ul className={styles.stages}>
+    <ul className={styles}>
       {stages.map(([name, status, detailsPath]: any) => {
         return (
           <GitlabPipelineStage
             {...{ name: name, status: status, detailsPath: detailsPath }}
             displayNames={!allPassed}
+            key={name}
           />
         );
       })}

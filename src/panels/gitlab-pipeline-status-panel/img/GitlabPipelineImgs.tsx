@@ -1,5 +1,10 @@
 import React, { FC } from 'react';
-import { SvgProps } from '@grafana/ui/components/Icon/assets/types';
+
+interface SvgProps extends React.HTMLAttributes<SVGElement> {
+  size: number;
+  secondaryColor?: string;
+  className?: string;
+}
 
 export const CachedBlack18dp: FC<SvgProps> = ({ size, defaultValue, ...rest }) => {
   return (
@@ -35,7 +40,7 @@ export const PendingBlack18dp: FC<SvgProps> = ({ size, defaultValue, ...rest }) 
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      enable-background="new 0 0 24 24"
+      enableBackground="new 0 0 24 24"
       viewBox="0 0 24 24"
       fill="black"
       width={size + 'px'}
